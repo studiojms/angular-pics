@@ -2,6 +2,20 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
 
+## Note
+
+To run this project, it is necessary to use the backend api (/api folder).
+
+You just need to enter in the api folder and run `npm start` (after running `npm instal` for the first time)
+
+The backend api will start in the port 3000.
+
+### Obs
+
+When installing the api dependencies, it may fail when trying to install sqlite3 lib.
+
+To get rid of the error, it is necessary to run `npm install sqlite3`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
