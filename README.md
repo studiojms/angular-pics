@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Note
 
-To run this project, it is necessary to use the backend api (/api folder).
+To run this project, it is necessary to use the backend api (`cd /api` folder).
 
 You just need to enter in the api folder and run `npm start` (after running `npm instal` for the first time)
 
