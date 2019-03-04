@@ -1,3 +1,7 @@
 <h1>AngularPics</h1>
 
-<pic-photo *ngFor="let photo of photos" [url]="photo.url" [alt]="photo.description"></pic-photo>
+<nav class="nav nav-pills">
+  <a class="nav-item nav-link" routerLink="/photos/johndoe" routerLinkActive="active">Photos</a>
+</nav>
+
+<router-outlet></router-outlet>
