@@ -4,9 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { PhotoComponent } from './photo/photo.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
+import { PhotoGridComponent } from './photo-list/photo-grid/photo-grid.component';
 
 @NgModule({
   imports: [HttpClientModule, CommonModule],
-  declarations: [PhotoComponent, PhotoListComponent],
+  declarations: [PhotoComponent, PhotoListComponent, PhotoGridComponent],
 })
 export class PhotosModule {}
