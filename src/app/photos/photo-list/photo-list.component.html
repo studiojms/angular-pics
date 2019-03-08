@@ -1,1 +1,12 @@
-<pic-photo-grid [photos]="photos"></pic-photo-grid>
+<div class="text-center mt-3 mb-3">
+  <form>
+    <input
+      type="search"
+      class="rounded"
+      placeholder="Type to search..."
+      autofocus
+      (keyup)="filter = $event.target.value"
+    />
+  </form>
+</div>
+<pic-photo-grid [photos]="photos | filterByDescription: filter"></pic-photo-grid>
