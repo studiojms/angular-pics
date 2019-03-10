@@ -2,11 +2,13 @@
   <form>
     <input
       type="search"
-      class="rounded"
+      class="rounded w-75"
       placeholder="Type to search..."
       autofocus
-      (keyup)="filter = $event.target.value"
+      (keyup)="debounce.next($event.target.value)"
     />
   </form>
 </div>
 <pic-photo-grid [photos]="photos | filterByDescription: filter"></pic-photo-grid>
+
+<pic-load-button (click)="loadPhotos()" [hasData]="shouldLoadMore"></pic-load-button>

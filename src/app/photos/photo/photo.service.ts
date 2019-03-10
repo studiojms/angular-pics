@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { IPhoto } from './photo';
 import { Observable } from 'rxjs';
 
@@ -9,5 +9,11 @@ export class PhotoService {
 
   listForUser(userName: string): Observable<IPhoto[]> {
     return this.http.get<IPhoto[]>(`http://localhost:3000/${userName}/photos`);
+  }
+
+  listForUserPaginated(userName: string, page: number = 1): Observable<IPhoto[]> {
+    const params = new HttpParams().append('page', page.toString());
+
+    return this.http.get<IPhoto[]>(`http://localhost:3000/${userName}/photos`, { params });
   }
 }
