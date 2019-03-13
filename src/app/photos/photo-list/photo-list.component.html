@@ -9,6 +9,7 @@
     />
   </form>
 </div>
+<pic-loader></pic-loader>
 <pic-photo-grid [photos]="photos | filterByDescription: filter"></pic-photo-grid>
 
 <pic-load-button (click)="loadPhotos()" [hasData]="shouldLoadMore"></pic-load-button>
