@@ -10,4 +10,10 @@ export class PhotoComponent {
 
   @Input()
   alt = '';
+
+  @Input()
+  comments: number;
+
+  @Input()
+  likes: number;
 }

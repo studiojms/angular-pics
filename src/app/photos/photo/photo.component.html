@@ -1,4 +1,7 @@
 <div class="text-center">
   <img class="img-thumbnail" [src]="url" [alt]="alt" />
-  <small>{{ alt }}</small>
+  <!-- <small>{{ alt }}</small> -->
+  <div class="text-center py-2">
+    <i class="far fa-heart mr-1"></i> {{ likes }} <i class="far fa-comments ml-2 mr-1"></i> {{ comments }}
+  </div>
 </div>

@@ -4,7 +4,14 @@
 <ol class="list-unstyled">
   <li *ngFor="let cols of rows" class="row no-gutters">
     <div *ngFor="let photo of cols" class="col-4">
-      <pic-photo [url]="photo.url" [alt]="photo.description"></pic-photo>
+      <pic-card [title]="photo.description">
+        <pic-photo
+          [url]="photo.url"
+          [alt]="photo.description"
+          [likes]="photo.likes"
+          [comments]="photo.comments"
+        ></pic-photo>
+      </pic-card>
     </div>
   </li>
 </ol>
