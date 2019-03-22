@@ -8,9 +8,10 @@ import { LoadButtonComponent } from './load-button/load-button.component';
 import { FilterByDescriptionPipe } from './filter-by-description.pipe';
 import { PhotoModule } from '../photo/photo.module';
 import { CardModule } from 'src/app/shared/card/card.module';
+import { SearchModule } from './search/search.module';
 
 @NgModule({
-  imports: [HttpClientModule, CommonModule, PhotoModule, CardModule],
+  imports: [HttpClientModule, CommonModule, PhotoModule, CardModule, SearchModule],
   declarations: [PhotoListComponent, PhotoGridComponent, LoadButtonComponent, FilterByDescriptionPipe],
 })
 export class PhotoListModule {}

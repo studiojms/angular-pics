@@ -11,10 +11,9 @@ import { PhotoService } from '../photo/photo.service';
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.css'],
 })
-export class PhotoListComponent implements OnInit, OnDestroy {
+export class PhotoListComponent implements OnInit {
   photos: IPhoto[] = [];
   filter: string = '';
-  debounce: Subject<string> = new Subject<string>();
   shouldLoadMore: boolean = true;
   currentPage: number = 1;
 
@@ -22,17 +21,13 @@ export class PhotoListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.photos = this.activatedRoute.snapshot.data.photos;
-    this.debounce.pipe(debounceTime(300)).subscribe(value => (this.filter = value));
-  }
-
-  ngOnDestroy(): void {
-    this.debounce.unsubscribe();
   }
 
   loadPhotos() {
     const userName = this.activatedRoute.snapshot.params.userName;
 
     this.photoService.listForUserPaginated(userName, ++this.currentPage).subscribe(photos => {
+      this.filter = '';
       this.photos = [...this.photos, ...photos];
       this.shouldLoadMore = photos.length > 0;
     });
