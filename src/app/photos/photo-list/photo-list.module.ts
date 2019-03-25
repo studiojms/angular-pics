@@ -9,9 +9,10 @@ import { FilterByDescriptionPipe } from './filter-by-description.pipe';
 import { PhotoModule } from '../photo/photo.module';
 import { CardModule } from 'src/app/shared/card/card.module';
 import { SearchModule } from './search/search.module';
+import { HighlightOnHoverModule } from 'src/app/shared/highlight-on-hover/highlight-on-hover.module';
 
 @NgModule({
-  imports: [HttpClientModule, CommonModule, PhotoModule, CardModule, SearchModule],
+  imports: [HttpClientModule, CommonModule, PhotoModule, CardModule, SearchModule, HighlightOnHoverModule],
   declarations: [PhotoListComponent, PhotoGridComponent, LoadButtonComponent, FilterByDescriptionPipe],
 })
 export class PhotoListModule {}
