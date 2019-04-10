@@ -1,15 +1,17 @@
 <form class="form mt-4" [formGroup]="loginForm">
   <div class="form-group">
     <input type="text" class="form-control" placeholder="user name" autofocus formControlName="userName" />
-    <small class="text-danger d-block mt-2" *ngIf="loginForm.get('userName').errors?.required"
-      >User Name is required!</small
-    >
+    <pic-validation-message
+      text="User Name is required!"
+      *ngIf="loginForm.get('userName').errors?.required"
+    ></pic-validation-message>
   </div>
   <div class="form-group">
     <input type="password" class="form-control" placeholder="password" formControlName="password" />
-    <small class="text-danger d-block mt-2" *ngIf="loginForm.get('password').errors?.required">
-      Password is required!
-    </small>
+    <pic-validation-message
+      text="Password is required!"
+      *ngIf="loginForm.get('password').errors?.required"
+    ></pic-validation-message>
   </div>
   <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Login</button>
 </form>
