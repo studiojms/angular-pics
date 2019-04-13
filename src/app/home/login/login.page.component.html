@@ -1,6 +1,13 @@
 <form class="form mt-4" [formGroup]="loginForm" (submit)="login()">
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="user name" autofocus formControlName="userName" />
+    <input
+      type="text"
+      #userNameInput
+      class="form-control"
+      placeholder="user name"
+      autofocus
+      formControlName="userName"
+    />
     <pic-validation-message
       text="User Name is required!"
       *ngIf="!!loginForm.get('userName').errors?.required"

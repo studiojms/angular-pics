@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { Router } from '@angular/router';
+import { PlatformDetectorService } from 'src/app/core/platformDetector/platform-detector.service';
 
 @Component({
   templateUrl: './login.page.component.html',
@@ -10,7 +11,15 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
+  @ViewChild('userNameInput')
+  userNameInput: ElementRef<HTMLInputElement>;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private platformDetectorService: PlatformDetectorService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -26,8 +35,10 @@ export class LoginPageComponent implements OnInit {
     this.authService.authenticate(userName, password).subscribe(
       () => this.router.navigate(['photos', userName]),
       err => {
-        console.log(err);
         this.loginForm.reset();
+        if (this.platformDetectorService.isBrowser()) {
+          this.userNameInput.nativeElement.focus();
+        }
       }
     );
   }
