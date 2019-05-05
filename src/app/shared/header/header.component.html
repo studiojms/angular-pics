@@ -1,9 +1,16 @@
 <header class="sticy-top">
   <nav class="navbar navbar-light bg-white">
     <a class="navbar-brand">Angular Pics</a>
-    <div>
+    <div *ngIf="user$ | async as user; else login">
       <i class="fa fa-user-circle fa-lg mr-2"></i>
       <a class="ml-2">{{ user?.name }}</a>
+      <a class="ml-1" (click)="logout()">(logout)</a>
     </div>
+
+    <ng-template #login>
+      <span class="navbar-text">
+        Please login!
+      </span>
+    </ng-template>
   </nav>
 </header>
