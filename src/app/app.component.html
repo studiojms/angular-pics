@@ -1,6 +1,6 @@
 <pic-header></pic-header>
-<nav class="nav nav-pills ml-3">
-  <a class="nav-item nav-link" routerLink="/photos/johndoe" routerLinkActive="active">Photos</a>
+<nav *ngIf="getAuthenticatedUser()" class="nav nav-pills ml-3">
+  <a class="nav-item nav-link" [routerLink]="['photos', getAuthenticatedUser()]" routerLinkActive="active">My Photos</a>
 </nav>
 
 <router-outlet></router-outlet>
