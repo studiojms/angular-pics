@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { LoginPageComponent } from './login/login.page.component';
 import { ValidationMessageModule } from '../shared/validation-message/validation-message.module';
+import { SignUpPageComponent } from './signup/signup.page.component';
 
 @NgModule({
-  declarations: [LoginPageComponent],
-  imports: [CommonModule, ReactiveFormsModule, ValidationMessageModule, RouterModule],
+  declarations: [LoginPageComponent, SignUpPageComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ValidationMessageModule, RouterModule],
 })
 export class HomeModule {}
