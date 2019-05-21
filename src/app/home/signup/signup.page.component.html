@@ -2,7 +2,7 @@
 
 <form [formGroup]="signUpForm" class="form mt-4" (submit)="signup()">
   <div class="form-group">
-    <input formControlName="email" placeholder="E-mail" class="form-control" autofocus />
+    <input formControlName="email" #emailInput placeholder="E-mail" class="form-control" autofocus />
     <pic-validation-message *ngIf="signUpForm.get('email').errors?.required" text="Email is required!">
     </pic-validation-message>
     <pic-validation-message *ngIf="signUpForm.get('email').errors?.email" text="Invalid e-mail">

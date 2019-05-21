@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
+import { PlatformDetectorService } from 'src/app/core/platformDetector/platform-detector.service';
 import { CustomMultipleWordsValidator } from 'src/app/shared/validators/custom-multiple-words-validator';
 import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
-import { HttpClient } from '@angular/common/http';
 import { IUserData } from './user-data';
 import { SignUpService } from './signup.service';
-import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './signup.page.component.html',
@@ -14,11 +14,15 @@ import { Router } from '@angular/router';
 export class SignUpPageComponent implements OnInit {
   signUpForm: FormGroup;
 
+  @ViewChild('emailInput')
+  emailInput: ElementRef<HTMLInputElement>;
+
   constructor(
     private formBuilder: FormBuilder,
     private userNotTakenValidatorService: UserNotTakenValidatorService,
     private signUpService: SignUpService,
-    private router: Router
+    private router: Router,
+    private platformDetectorService: PlatformDetectorService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +36,13 @@ export class SignUpPageComponent implements OnInit {
       ],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
+    this.setInputFocus();
+  }
+
+  setInputFocus() {
+    if (this.platformDetectorService.isBrowser()) {
+      this.emailInput.nativeElement.focus();
+    }
   }
 
   signup() {
@@ -40,6 +51,7 @@ export class SignUpPageComponent implements OnInit {
       () => this.router.navigate(['']),
       err => {
         console.error(err);
+        this.setInputFocus();
       }
     );
   }

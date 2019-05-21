@@ -26,6 +26,13 @@ export class LoginPageComponent implements OnInit {
       userName: ['', Validators.required],
       password: ['', Validators.required],
     });
+    this.setInputFocus();
+  }
+
+  setInputFocus() {
+    if (this.platformDetectorService.isBrowser()) {
+      this.userNameInput.nativeElement.focus();
+    }
   }
 
   login() {
@@ -36,9 +43,7 @@ export class LoginPageComponent implements OnInit {
       () => this.router.navigate(['photos', userName]),
       err => {
         this.loginForm.reset();
-        if (this.platformDetectorService.isBrowser()) {
-          this.userNameInput.nativeElement.focus();
-        }
+        this.setInputFocus();
       }
     );
   }
