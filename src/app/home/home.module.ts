@@ -7,9 +7,10 @@ import { LoginPageComponent } from './login/login.page.component';
 import { ValidationMessageModule } from '../shared/validation-message/validation-message.module';
 import { SignUpPageComponent } from './signup/signup.page.component';
 import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './home.routing.module';
 
 @NgModule({
   declarations: [LoginPageComponent, SignUpPageComponent, HomeComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ValidationMessageModule, RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ValidationMessageModule, RouterModule, HomeRoutingModule],
 })
 export class HomeModule {}
