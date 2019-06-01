@@ -10,6 +10,7 @@ import { SignUpService } from './signup.service';
 
 @Component({
   templateUrl: './signup.page.component.html',
+  providers: [UserNotTakenValidatorService],
 })
 export class SignUpPageComponent implements OnInit {
   signUpForm: FormGroup;

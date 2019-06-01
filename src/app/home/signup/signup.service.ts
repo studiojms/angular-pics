@@ -4,7 +4,7 @@ import { IUserData } from './user-data';
 
 const API_URL = 'http://localhost:3000';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SignUpService {
   constructor(private httpClient: HttpClient) {}
 
