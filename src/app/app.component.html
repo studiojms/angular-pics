@@ -1,6 +1,12 @@
 <pic-header></pic-header>
 <nav *ngIf="getAuthenticatedUser()" class="nav nav-pills ml-3">
-  <a class="nav-item nav-link" [routerLink]="['photos', getAuthenticatedUser()]" routerLinkActive="active">My Photos</a>
+  <a
+    class="nav-item nav-link"
+    [routerLink]="['photos', getAuthenticatedUser()]"
+    routerLinkActive="active"
+    >My Photos</a
+  >
 </nav>
 
 <router-outlet></router-outlet>
+<pic-footer></pic-footer>
