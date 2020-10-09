@@ -11,7 +11,7 @@ import { Observable } from "rxjs";
 import { UserService } from "../user/user.service";
 
 @Injectable({ providedIn: "root" })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
 
   canActivate(
@@ -24,8 +24,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree> {
     let returnValue = true;
 
-    if (!this.userService.isLogged()) {
-      this.router.navigate([""]);
+    if (this.userService.isLogged()) {
+      //redirect to home page
+      const userName = this.userService.getUserName();
+
+      this.router.navigate(["photos", userName]);
+
       returnValue = false;
     }
 
