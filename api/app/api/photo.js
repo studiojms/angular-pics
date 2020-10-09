@@ -1,17 +1,17 @@
-const { PhotoDao, UserDao } = require('../infra');
-const jimp = require('jimp');
-const path = require('path');
-const fs = require('fs');
-const unlink = require('util').promisify(fs.unlink);
+const { PhotoDao, UserDao } = require("../infra");
+const jimp = require("jimp");
+const path = require("path");
+const fs = require("fs");
+const unlink = require("util").promisify(fs.unlink);
 
 const api = {};
 
-const userCanDelete = user => photo => photo.userId == user.id;
+const userCanDelete = (user) => (photo) => photo.userId == user.id;
 
-const defaultExtension = '.jpg';
+const defaultExtension = ".jpg";
 
 api.list = async (req, res) => {
-  console.log('####################################');
+  console.log("####################################");
   const { userName } = req.params;
   const { page } = req.query;
   const user = await new UserDao(req.db).findByName(userName);
@@ -20,31 +20,27 @@ api.list = async (req, res) => {
     const photos = await new PhotoDao(req.db).listAllFromUser(userName, page);
     res.json(photos);
   } else {
-    res.status(404).json({ message: 'User not found' });
+    res.status(404).json({ message: "User not found" });
   }
 };
 
 api.add = async (req, res) => {
-  console.log('####################################');
-  console.log('Received JSON data', req.body);
+  console.log("####################################");
+  console.log("Received JSON data", req.body);
   const photo = req.body;
-  photo.file = '';
+  photo.file = "";
   const id = await new PhotoDao(req.db).add(photo, req.user.id);
   res.json(id);
 };
 
 api.addUpload = async (req, res) => {
-  console.log('upload complete');
-  console.log('Photo data', req.body);
-  console.log('File info', req.file);
+  console.log("upload complete");
+  console.log("Photo data", req.body);
+  console.log("File info", req.file);
 
   const image = await jimp.read(req.file.path);
 
-  await image
-    .exifRotate()
-    .cover(460, 460)
-    .autocrop()
-    .write(req.file.path);
+  await image.exifRotate().cover(460, 460).autocrop().write(req.file.path);
 
   const photo = req.body;
   photo.url = path.basename(req.file.path);
@@ -54,13 +50,13 @@ api.addUpload = async (req, res) => {
 
 api.findById = async (req, res) => {
   const { photoId } = req.params;
-  console.log('####################################');
+  console.log("####################################");
   console.log(`Finding photo for ID ${photoId}`);
   const photo = await new PhotoDao(req.db).findById(photoId);
   if (photo) {
     res.json(photo);
   } else {
-    res.status(404).json({ message: 'Photo does not exist' });
+    res.status(404).json({ message: "Photo does not exist" });
   }
 };
 
@@ -70,7 +66,7 @@ api.remove = async (req, res) => {
   const dao = new PhotoDao(req.db);
   const photo = await dao.findById(photoId);
   if (!photo) {
-    const message = 'Photo does not exist';
+    const message = "Photo does not exist";
     console.log(message);
     return res.status(404).json({ message });
   }
@@ -84,7 +80,7 @@ api.remove = async (req, res) => {
             Forbiden operation. User ${user.id} 
             can delete photo from user ${photo.userId}
         `);
-    res.status(403).json({ message: 'Forbidden' });
+    res.status(403).json({ message: "Forbidden" });
   }
 };
 
