@@ -6,6 +6,7 @@ import { PhotoFormComponent } from "./photo-form.component";
 import { ValidationMessageModule } from "src/app/shared/validation-message/validation-message.module";
 import { RouterModule } from "@angular/router";
 import { PhotoModule } from "../photo/photo.module";
+import { ImmediateClickModule } from "src/app/shared/immediate-click/immediate-click.module";
 
 @NgModule({
   declarations: [PhotoFormComponent],
@@ -15,6 +16,7 @@ import { PhotoModule } from "../photo/photo.module";
     ValidationMessageModule,
     RouterModule,
     PhotoModule,
+    ImmediateClickModule,
   ],
 })
 export class PhotoFormModule {}
