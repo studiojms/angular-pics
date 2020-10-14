@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { IPhoto } from "./photo";
+import { IPhotoComment } from "./photo-comment";
 
 @Injectable({ providedIn: "root" })
 export class PhotoService {
@@ -31,7 +32,19 @@ export class PhotoService {
     return this.http.post(`http://localhost:3000/photos/upload`, formData);
   }
 
-  findById(id: string) {
-    return this.http.get<IPhoto>(`http://localhost:3000/photos/${id}`);
+  findById(photoId: number) {
+    return this.http.get<IPhoto>(`http://localhost:3000/photos/${photoId}`);
+  }
+
+  getComments(photoId: number) {
+    return this.http.get<IPhotoComment[]>(
+      `http://localhost:3000/photos/${photoId}/comments`
+    );
+  }
+
+  addComment(photoId: number, commentText: string) {
+    return this.http.post(`http://localhost:3000/photos/${photoId}/comments`, {
+      commentText,
+    });
   }
 }
