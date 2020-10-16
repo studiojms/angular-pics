@@ -7,6 +7,15 @@
     <div class="col-lg-4 p-4">
       <small>
         <p class="text-left break-word">{{ photo.description }}</p>
+        <div class="text-left mb-4">
+          <i (click)="remove()" class="far fa-comment fa-2x mr-2 ml-2"></i>
+          {{ photo.comments }}
+          <i
+            photoOwnerOnly
+            [ownedPhoto]="photo"
+            class="far fa-trash-alt fa-2x float-right"
+          ></i>
+        </div>
         <hr />
       </small>
       <pic-photo-comments
