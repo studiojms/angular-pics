@@ -24,17 +24,32 @@ const routes: Routes = [
     resolve: {
       photos: PhotoListResolver,
     },
+    data: {
+      title: "AngularPics - Timeline",
+    },
   },
   {
     path: "p/add",
     component: PhotoFormComponent,
     canActivate: [AuthGuard],
+    data: {
+      title: "AngularPics - Photo Upload",
+    },
   },
   {
     path: "p/:photoId",
     component: PhotoDetailComponent,
+    data: {
+      title: "AngularPics - Photo Detail",
+    },
   },
-  { path: "not-found", component: NotFoundComponent },
+  {
+    path: "not-found",
+    component: NotFoundComponent,
+    data: {
+      title: "AngularPics - Not Found",
+    },
+  },
   { path: "**", redirectTo: "not-found" },
 ];
 

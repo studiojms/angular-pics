@@ -15,10 +15,16 @@ const routes: Routes = [
       {
         path: "",
         component: LoginPageComponent,
+        data: {
+          title: "AngularPics - Login",
+        },
       },
       {
         path: "register",
         component: SignUpPageComponent,
+        data: {
+          title: "AngularPics - Sign Up",
+        },
       },
     ],
   },
