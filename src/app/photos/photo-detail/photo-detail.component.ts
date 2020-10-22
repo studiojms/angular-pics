@@ -44,4 +44,15 @@ export class PhotoDetailComponent implements OnInit {
         this.alertService.danger("Could not delete the photo");
       };
   }
+
+  like(photo: IPhoto) {
+    this.photoService.like(photo.id).subscribe(
+      (liked) => {
+        if (liked) {
+          this.photo$ = this.photoService.findById(photo.id);
+        }
+      },
+      (err) => console.error(err)
+    );
+  }
 }
