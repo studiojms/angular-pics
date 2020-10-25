@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { environment } from "src/environments/environment";
 
-const IMG_API_URL = environment.apiUrl;
+const IMG_API_URL = `${environment.apiUrl}/imgs`;
 
 @Component({
   selector: "pic-photo",
