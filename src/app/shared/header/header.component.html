@@ -1,6 +1,23 @@
 <header class="sticy-top">
   <nav class="navbar navbar-light bg-white">
-    <a class="navbar-brand">Angular Pics</a>
+    <a class="navbar-brand">
+      <i
+        tabindex="0"
+        (keyup.control.m)="menu.toggle()"
+        (click)="menu.toggle()"
+        class="fas fa-bars mr-2"
+      ></i>
+      Angular Pics
+    </a>
+
+    <pic-menu #menu>
+      <ul class="list-unstyled">
+        <li>
+          <a showIfLogged [routerLink]="['p', 'add']">Upload</a>
+        </li>
+      </ul>
+    </pic-menu>
+
     <div *ngIf="user$ | async as user; else login">
       <i class="fa fa-user-circle fa-lg mr-2"></i>
       <a class="ml-2">{{ user?.name }}</a>
