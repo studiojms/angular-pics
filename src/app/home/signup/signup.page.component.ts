@@ -1,21 +1,22 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
-import { PlatformDetectorService } from 'src/app/core/platformDetector/platform-detector.service';
-import { CustomMultipleWordsValidator } from 'src/app/shared/validators/custom-multiple-words-validator';
-import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
-import { IUserData } from './user-data';
-import { SignUpService } from './signup.service';
+import { PlatformDetectorService } from "src/app/core/platformDetector/platform-detector.service";
+import { CustomMultipleWordsValidator } from "src/app/shared/validators/custom-multiple-words-validator";
+import { UserNotTakenValidatorService } from "./user-not-taken.validator.service";
+import { IUserData } from "./user-data";
+import { SignUpService } from "./signup.service";
+import { userNamePasswordCrossfieldValidator } from "./username-password-crossfield-validator";
 
 @Component({
-  templateUrl: './signup.page.component.html',
+  templateUrl: "./signup.page.component.html",
   providers: [UserNotTakenValidatorService],
 })
 export class SignUpPageComponent implements OnInit {
   signUpForm: FormGroup;
 
-  @ViewChild('emailInput')
+  @ViewChild("emailInput")
   emailInput: ElementRef<HTMLInputElement>;
 
   constructor(
@@ -27,16 +28,39 @@ export class SignUpPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.signUpForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      fullName: ['', [Validators.required, Validators.minLength(10), CustomMultipleWordsValidator]],
-      userName: [
-        '',
-        [Validators.required, Validators.maxLength(20), Validators.pattern(/^[a-z_][a-z0-9_\-]/)],
-        this.userNotTakenValidatorService.checkUserNameTaken(),
-      ],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-    });
+    this.signUpForm = this.formBuilder.group(
+      {
+        email: ["", [Validators.required, Validators.email]],
+        fullName: [
+          "",
+          [
+            Validators.required,
+            Validators.minLength(10),
+            CustomMultipleWordsValidator,
+          ],
+        ],
+        userName: [
+          "",
+          [
+            Validators.required,
+            Validators.maxLength(20),
+            Validators.pattern(/^[a-z_][a-z0-9_\-]/),
+          ],
+          this.userNotTakenValidatorService.checkUserNameTaken(),
+        ],
+        password: [
+          "",
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+      },
+      {
+        validators: userNamePasswordCrossfieldValidator,
+      }
+    );
     this.setInputFocus();
   }
 
@@ -47,13 +71,15 @@ export class SignUpPageComponent implements OnInit {
   }
 
   signup() {
-    const newUser = this.signUpForm.getRawValue() as IUserData;
-    this.signUpService.signup(newUser).subscribe(
-      () => this.router.navigate(['']),
-      err => {
-        console.error(err);
-        this.setInputFocus();
-      }
-    );
+    if (this.signUpForm.valid && !this.signUpForm.pending) {
+      const newUser = this.signUpForm.getRawValue() as IUserData;
+      this.signUpService.signup(newUser).subscribe(
+        () => this.router.navigate([""]),
+        (err) => {
+          console.error(err);
+          this.setInputFocus();
+        }
+      );
+    }
   }
 }

@@ -1,19 +1,52 @@
 <h4 class="text-center">Register to be part of a new world!</h4>
 
-<form [formGroup]="signUpForm" class="form mt-4" (submit)="signup()">
+<form
+  #form="ngForm"
+  [formGroup]="signUpForm"
+  class="form mt-4"
+  (submit)="signup()"
+>
   <div class="form-group">
-    <input formControlName="email" #emailInput placeholder="E-mail" class="form-control" autofocus />
-    <pic-validation-message *ngIf="signUpForm.get('email').errors?.required" text="Email is required!">
+    <input
+      formControlName="email"
+      #emailInput
+      placeholder="E-mail"
+      class="form-control"
+      autofocus
+    />
+    <pic-validation-message
+      *ngIf="
+        signUpForm.get('email').errors?.required &&
+        (form.submitted || signUpForm.get('email').touched)
+      "
+      text="Email is required!"
+    >
     </pic-validation-message>
-    <pic-validation-message *ngIf="signUpForm.get('email').errors?.email" text="Invalid e-mail">
+    <pic-validation-message
+      *ngIf="signUpForm.get('email').errors?.email"
+      text="Invalid e-mail"
+    >
     </pic-validation-message>
   </div>
 
   <div class="form-group">
-    <input formControlName="fullName" placeholder="Full Name" class="form-control" />
-    <pic-validation-message *ngIf="signUpForm.get('fullName').errors?.required" text="Full Name is required!">
+    <input
+      formControlName="fullName"
+      placeholder="Full Name"
+      class="form-control"
+    />
+    <pic-validation-message
+      *ngIf="
+        signUpForm.get('fullName').errors?.required &&
+        (form.submitted || signUpForm.get('fullName').touched)
+      "
+      text="Full Name is required!"
+    >
     </pic-validation-message>
-    <pic-validation-message *ngIf="signUpForm.get('fullName').errors?.minlength" text="Minimum length is 10 chars">
+    <pic-validation-message
+      *ngIf="signUpForm.get('fullName').errors?.minlength"
+      text="Minimum length is 10 chars"
+    >
     </pic-validation-message>
     <pic-validation-message
       *ngIf="signUpForm.get('fullName').errors?.customMultipleWords"
@@ -23,32 +56,72 @@
   </div>
 
   <div class="form-group">
-    <input formControlName="userName" placeholder="User Name" class="form-control" />
-    <pic-validation-message *ngIf="signUpForm.get('userName').errors?.required" text="User Name is required!">
+    <input
+      formControlName="userName"
+      placeholder="User Name"
+      class="form-control"
+    />
+    <pic-validation-message
+      *ngIf="
+        signUpForm.get('userName').errors?.required &&
+        (form.submitted || signUpForm.get('userName').touched)
+      "
+      text="User Name is required!"
+    >
     </pic-validation-message>
-    <pic-validation-message *ngIf="signUpForm.get('userName').errors?.maxlength" text="Maximum length is 20 chars">
+    <pic-validation-message
+      *ngIf="signUpForm.get('userName').errors?.maxlength"
+      text="Maximum length is 20 chars"
+    >
     </pic-validation-message>
     <pic-validation-message
       *ngIf="signUpForm.get('userName').errors?.pattern"
       text="It must start with lowercase alphabetic char"
     >
     </pic-validation-message>
-    <pic-validation-message *ngIf="signUpForm.get('userName').errors?.userNameTaken" text="Username already taken">
+    <pic-validation-message
+      *ngIf="signUpForm.get('userName').errors?.userNameTaken"
+      text="Username already taken"
+    >
     </pic-validation-message>
-    <small *ngIf="signUpForm.get('userName').valid" class="text-success">User Available</small>
+    <small *ngIf="signUpForm.get('userName').valid" class="text-success"
+      >User Available</small
+    >
   </div>
 
   <div class="form-group">
-    <input formControlName="password" type="password" placeholder="Password" class="form-control" />
-    <pic-validation-message *ngIf="signUpForm.get('password').errors?.required" text="Password is required!">
+    <input
+      formControlName="password"
+      type="password"
+      placeholder="Password"
+      class="form-control"
+    />
+    <pic-validation-message
+      *ngIf="
+        signUpForm.get('password').errors?.required &&
+        (form.submitted || signUpForm.get('password').touched)
+      "
+      text="Password is required!"
+    >
     </pic-validation-message>
-    <pic-validation-message *ngIf="signUpForm.get('password').errors?.minlength" text="Minimum length is 6 chars">
+    <pic-validation-message
+      *ngIf="signUpForm.get('password').errors?.minlength"
+      text="Minimum length is 6 chars"
+    >
     </pic-validation-message>
-    <pic-validation-message *ngIf="signUpForm.get('password').errors?.maxlength" text="Maximum length is 20 chars">
+    <pic-validation-message
+      *ngIf="signUpForm.get('password').errors?.maxlength"
+      text="Maximum length is 20 chars"
+    >
+    </pic-validation-message>
+    <pic-validation-message
+      *ngIf="signUpForm.errors?.userNamePassword"
+      text="Username and password must be different"
+    >
     </pic-validation-message>
   </div>
 
-  <button [disabled]="signUpForm.invalid || signUpForm.pending" class="btn btn-primary btn-block">Register</button>
+  <button class="btn btn-primary btn-block">Register</button>
 
   <p>Already a user? <a [routerLink]="['']">Sign In!</a></p>
 </form>
