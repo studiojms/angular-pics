@@ -10,6 +10,14 @@ You just need to enter in the api folder and run `npm start` (after running `npm
 
 The backend api will start in the port 3000.
 
+---
+
+There is also a log server. To un it, it's necessary to use the log-server (`cd /log-server` folder).
+
+Just enter it and run `npm start` (after running `npm instal` for the first time)
+
+The log-server api will start in the port 7000.
+
 ### Obs
 
 When installing the api dependencies, it may fail when trying to install sqlite3 lib.
